@@ -1,0 +1,31 @@
+CUDA_VISIBLE_DEVICES=0 \
+python finetune_trainer.py \
+  --data_dir ./task_all \
+  --cache_dir ./cache \
+  --output_dir ./output/1/ \
+  --num_train_epochs 5 \
+  --model_name_or_path t5-base \
+  --learning_rate 1e-4 \
+  --adam_epsilon 1e-06 \
+  --do_train \
+  --temp_start 1.0 \
+  --temp_end 0.7 \
+  --scheduler linear \
+  --add_tokens \
+  --eval_beams 2 \
+  --per_device_train_batch_size=1 \
+  --per_device_eval_batch_size=16 \
+  --gradient_accumulation_steps=4 \
+  --overwrite_output_dir \
+  --max_source_length 2560 \
+  --max_target_length 500 \
+  --task translation \
+  --warmup_steps 500 \
+  --evaluation_strategy epoch \
+  --save_strategy epoch \
+  --logging_steps 200 \
+  --predict_with_generate \
+  --save_total_limit 3 \
+  --generation_max_length 500 \
+  --generation_num_beams 2 \
+
